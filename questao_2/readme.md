@@ -1,4 +1,4 @@
-# Calculadora de médias
+# Ordenador de números
 
 Código da questão 2 criado para o teste prático da FTEC.
 
