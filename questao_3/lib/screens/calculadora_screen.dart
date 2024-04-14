@@ -46,7 +46,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   }
 
   void _calculate() {
-    if (_operation == null || _secondNumberDisplay.isEmpty) {
+    if (_secondNumberDisplay.isEmpty) {
       return;
     }
 
@@ -110,6 +110,14 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       _isResult = false;
     }
 
+    if (_firstNumberDisplay.isNotEmpty &&
+        _firstNumberDisplay.characters.last == Operation.dot.symbol) {
+      setState(() {
+        _firstNumberDisplay =
+            _firstNumberDisplay.substring(0, _firstNumberDisplay.length - 1);
+      });
+    }
+
     setState(() {
       // Casos especiais, onde a operação faz algo diferente
       switch (operation) {
@@ -126,8 +134,13 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
           _calculate();
           return;
         default:
-          if (_firstNumberDisplay.isEmpty || _secondNumberDisplay.isNotEmpty) {
+          if (_secondNumberDisplay.isNotEmpty) {
             return;
+          }
+
+          if (_firstNumberDisplay.isEmpty) {
+            _firstNumberDisplay = Number.zero.symbol;
+            _operation = operation;
           }
 
           _operation = operation;
