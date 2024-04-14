@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:questao_3/components/num_display.dart';
 import 'package:questao_3/components/num_keyboard.dart';
@@ -50,10 +51,10 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       return;
     }
 
-    final double firstNumber = double.parse(_firstNumberDisplay);
-    final double secondNumber = double.parse(_secondNumberDisplay);
+    final firstNumber = Decimal.parse(_firstNumberDisplay);
+    final secondNumber = Decimal.parse(_secondNumberDisplay);
 
-    double result = 0;
+    Decimal result = Decimal.zero;
     _isResult = true;
 
     switch (_operation) {
@@ -61,12 +62,11 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
         result = firstNumber + secondNumber;
         break;
       case Operation.divide:
-        if (secondNumber == 0) {
+        if (secondNumber.toString() == Number.zero.symbol) {
           _gotError = true;
           break;
         }
-
-        result = firstNumber / secondNumber;
+        result = (firstNumber / secondNumber) as Decimal;
         break;
       case Operation.multiply:
         result = firstNumber * secondNumber;
