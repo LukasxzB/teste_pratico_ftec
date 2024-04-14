@@ -17,13 +17,13 @@ extension OperationSymbol on Operation {
       case Operation.divide:
         return '/';
       case Operation.multiply:
-        return '×';
+        return 'x';
       case Operation.subtract:
         return '-';
       case Operation.cleanAll:
         return 'AC';
       case Operation.clean:
-        return '🡐';
+        return '<';
       case Operation.dot:
         return '.';
       case Operation.equal:
