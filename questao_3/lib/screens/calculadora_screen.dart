@@ -54,32 +54,34 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     final firstNumber = Decimal.parse(_firstNumberDisplay);
     final secondNumber = Decimal.parse(_secondNumberDisplay);
 
-    Decimal result = Decimal.zero;
+    String result = 'ERROR';
     _isResult = true;
 
     switch (_operation) {
       case Operation.add:
-        result = firstNumber + secondNumber;
+        result = (firstNumber + secondNumber).toString();
         break;
       case Operation.divide:
         if (secondNumber.toString() == Number.zero.symbol) {
           _gotError = true;
           break;
         }
-        result = (firstNumber / secondNumber) as Decimal;
+
+        final division = firstNumber / secondNumber;
+        result = division.toDouble().toString();
         break;
       case Operation.multiply:
-        result = firstNumber * secondNumber;
+        result = (firstNumber * secondNumber).toString();
         break;
       case Operation.subtract:
-        result = firstNumber - secondNumber;
+        result = (firstNumber - secondNumber).toString();
         break;
       default:
         break;
     }
 
     setState(() {
-      _firstNumberDisplay = result.toString();
+      _firstNumberDisplay = result;
       _secondNumberDisplay = '';
       _operation = null;
     });
